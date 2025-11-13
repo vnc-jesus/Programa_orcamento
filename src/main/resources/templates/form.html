@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Emissão de Orçamento</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 1000px; margin: 24px auto; }
+        header { display:flex; align-items:center; gap: 16px; border-bottom: 1px solid #ddd; padding-bottom: 12px; }
+        .empresa h1 { margin:0; font-size: 20px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        textarea { width: 100%; min-height: 120px; padding: 8px; }
+        input[type=text], input[type=number] { width: 100%; padding: 8px; }
+        .card { border: 1px solid #ddd; padding: 16px; border-radius: 8px; margin-top: 16px; }
+        button { padding: 10px 16px; cursor: pointer; }
+        .topbar { display:flex; justify-content: space-between; align-items: center; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <h2>Emissão de Orçamento</h2>
+        <a th:href="@{/config}">Configurar Empresa</a>
+    </div>
+    <header>
+        <div>
+            <img th:if="${empresa.caminhoLogo != null}"
+                 th:src="@{/logo.png}"
+                 alt="Logo"
+                 style="max-height:90px;">
+        </div>
+        <div class="empresa">
+            <h1 th:text="${empresa != null && empresa.nome != null ? empresa.nome : 'Nome da Empresa'}"></h1>
+            <div th:if="${empresa != null && empresa.cnpj != null}">CNPJ: <span th:text="${empresa.cnpj}"></span></div>
+            <div>
+                Conta: <span th:text="${empresa != null && empresa.tipoConta != null ? empresa.tipoConta : ''}"></span>
+                &nbsp;|&nbsp; Ag: <span th:text="${empresa != null && empresa.agencia != null ? empresa.agencia : ''}"></span>
+                &nbsp;|&nbsp; Nº: <span th:text="${empresa != null && empresa.numeroConta != null ? empresa.numeroConta : ''}"></span>
+            </div>
+        </div>
+    </header>
+
+    <form th:action="@{/gerar}" th:object="${orcamento}" method="post">
+        <div class="card">
+            <h3>Dados do Cliente</h3>
+            <div class="grid">
+                <div>
+                    <label>Nome</label>
+                    <input type="text" th:field="*{cliente.nome}" required>
+                </div>
+                <div>
+                    <label>CPF/CNPJ</label>
+                    <input type="text" th:field="*{cliente.documento}">
+                </div>
+            </div>
+            <div class="grid">
+                <div>
+                    <label>Endereço</label>
+                    <input type="text" th:field="*{cliente.endereco}">
+                </div>
+                <div>
+                    <label>Telefone</label>
+                    <input type="text" th:field="*{cliente.telefone}">
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Orçamento</h3>
+            <label>Descrição do serviço</label>
+            <textarea th:field="*{descricaoServico}" placeholder="Ex.: Retirada e recolocação de batentes e portas..."></textarea>
+            <div style="margin-top: 10px;">
+                <label>Valor do serviço (R$)</label>
+                <input type="number" step="0.01" min="0" th:field="*{valor}" required>
+            </div>
+        </div>
+
+        <div style="margin-top: 16px;">
+            <button type="submit">Gerar PDF</button>
+        </div>
+    </form>
+</body>
+</html>

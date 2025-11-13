@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Configuração da Empresa</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 900px; margin: 24px auto; }
+        .card { border: 1px solid #ddd; padding: 16px; border-radius: 8px; }
+        label { display:block; margin-top: 10px; }
+        input[type=text] { width: 100%; padding: 8px; }
+        .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        button { margin-top: 16px; padding: 10px 16px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2>Configuração da Empresa</h2>
+    <div class="card">
+        <form th:action="@{/config/salvar}" method="post" enctype="multipart/form-data" th:object="${empresa}">
+            <div class="row">
+                <div>
+                    <label>Nome da Empresa</label>
+                    <input type="text" th:field="*{nome}" placeholder="Ex.: Jurandir Ferreira de Pádua – EPP">
+                </div>
+                <div>
+                    <label>CNPJ</label>
+                    <input type="text" th:field="*{cnpj}" placeholder="00.000.000/0000-00">
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <label>Tipo de Conta</label>
+                    <input type="text" th:field="*{tipoConta}" placeholder="Corrente / Poupança / PJ">
+                </div>
+                <div>
+                    <label>Agência</label>
+                    <input type="text" th:field="*{agencia}" placeholder="Agência">
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <label>Número da Conta</label>
+                    <input type="text" th:field="*{numeroConta}" placeholder="Número da conta">
+                </div>
+                <div>
+                    <label>Logo da Empresa (PNG/JPG)</label>
+                    <input type="file" name="logoFile" accept="image/*">
+                </div>
+            </div>
+            <button type="submit">Salvar Configurações</button>
+        </form>
+    </div>
+    <p style="margin-top: 16px;">
+        <a th:href="@{/}">Voltar para Emissão</a>
+    </p>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "nome" : "VINICIUS DE JESUS",
+  "cnpj" : "22180159000114",
+  "tipoConta" : "corrente",
+  "agencia" : "1234",
+  "numeroConta" : "123456-9",
+  "caminhoLogo" : "/logo.png"
+}
