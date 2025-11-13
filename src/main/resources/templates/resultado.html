@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Orçamento Gerado</title>
+
     <style>
         body { font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; text-align: center; }
         a, button { padding: 10px 16px; display: inline-block; margin: 10px; background: #1976d2; color: white; text-decoration: none; border-radius: 6px; border: none; }
         a:hover, button:hover { background: #135ba1; }
     </style>
 </head>
+
 <body>
+
 <h2>✅ Orçamento gerado com sucesso!</h2>
 <p>Seu arquivo PDF foi criado e está pronto para download ou impressão.</p>
 
 <div>
-    <a th:href="@{${pdfPath}}" download>⬇️ Baixar PDF</a>
-    <a th:href="@{${pdfPath}}" target="_blank">🖨️ Abrir para imprimir</a>
+    <a th:href="@{/pdf/{nome}(nome=${pdfName})}" target="_blank">⬇️ Baixar PDF</a>
+    <a th:href="@{/pdf/{nome}(nome=${pdfName})}" target="_blank">🖨️ Imprimir</a>
 </div>
 
 <p><a th:href="@{/}">Voltar para nova emissão</a></p>
+
 </body>
 </html>

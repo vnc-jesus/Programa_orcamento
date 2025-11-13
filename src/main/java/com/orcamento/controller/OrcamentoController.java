@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.nio.file.Paths;
+
 @Controller
 public class OrcamentoController {
 
@@ -33,7 +35,8 @@ public class OrcamentoController {
 
         model.addAttribute("empresa", empresa);
         model.addAttribute("orcamento", orcamento);
-        model.addAttribute("pdfPath", caminhoPdf.replace("\\", "/"));
+        String nomeArquivo = Paths.get(caminhoPdf).getFileName().toString();
+        model.addAttribute("pdfName", nomeArquivo);
 
         return "resultado"; // redireciona para baixar pdf
     }
