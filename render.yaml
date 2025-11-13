@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: orcamento-web
+    runtime: docker
+    repo: https://github.com/vnc-jesus/Programa_orcamento
+
+    plan: free
+    branch: main
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: 8080
+    dockerfilePath: Dockerfile
