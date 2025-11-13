@@ -78,8 +78,3 @@ Alguns aprendizados marcantes:
 - Impressão
 - Nova emissão  
 
-### Pré-requisitos:
-
-- Java 17  
-- Maven  
-- IntelliJ IDEA (recomendado)
